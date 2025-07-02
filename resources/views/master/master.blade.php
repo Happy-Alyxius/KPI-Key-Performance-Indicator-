@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="{{asset('assets/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
     @yield('css')
 
 </head>
@@ -32,7 +35,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -43,8 +46,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/">
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -52,26 +55,120 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Data
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Tabel</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Isi Tabel :</h6>
-                        <a class="collapse-item" href="/tables">Tabel 1</a>
-                        <a class="collapse-item" href="/tables">Tabel 2</a>
-                    </div>
+            @if (Auth::user()->type == "kepegawaian")
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Data
                 </div>
-            </li>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tabel</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Isi Tabel :</h6>
+                            <a class="collapse-item" href="{{route('tabel-kpi')}}">KPI</a>
+                            <a class="collapse-item" href="{{route('tabel-jurusan')}}">Tabel Unit</a>
+                            <a class="collapse-item" href="{{route('tabel-jabatan')}}">Tabel Jabatan</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+
+            @if (Auth::user()->type == "mahasiswa")
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Data
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tabel</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Isi Tabel :</h6>
+                            <a class="collapse-item" href="#">Feedback</a>
+                            <a class="collapse-item" href="#">Verifikasi</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+
+            @if (Auth::user()->type == "tendik")
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Data
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tabel</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Isi Tabel :</h6>
+                            <a class="collapse-item" href="#">Rekap Kinerja</a>
+                            <a class="collapse-item" href="#">Laporan</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+
+            @if (Auth::user()->type == "rektor")
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Data
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tabel</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Isi Tabel :</h6>
+                            <a class="collapse-item" href="#">Verifikasi</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+
+            @if (Auth::user()->type == "kaprodi")
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Data
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Tabel</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Isi Tabel :</h6>
+                            <a class="collapse-item" href="#">Verifikasi</a>
+                        </div>
+                    </div>
+                </li>
+            @endif
+            <!-- Heading -->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -92,7 +189,15 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Menu User:</h6>
                         <a class="collapse-item" href="#">Profil</a>
-                        <a class="collapse-item" href="/login">Log Out</a>
+                        <a class="collapse-item" href="{{'route(logout)'}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Log Out</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
+                        @if (Auth::user()->type == "kepegawaian")
+                            <a class="collapse-item" href="{{route('tabel-user')}}">Tabel User</a>
+                        @endif
                     </div>
                 </div>
             </li>
@@ -122,8 +227,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle" src="{{asset('assets/img/undraw_profile.svg')}}">
+                                <span
+                                    class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{asset('assets/img/undraw_profile.svg')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -153,8 +260,10 @@
                 </nav>
                 <!-- End of Topbar -->
                 @yield('content')
-                 <!-- Footer -->
-             <footer class="sticky-footer bg-white">
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2021</span>
@@ -162,54 +271,57 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-            </div>
-            <!-- End of Page Wrapper -->
+        </div>
+        <!-- End of Page Wrapper -->
 
-            <!-- Scroll to Top Button-->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="login.html">Logout</a>
-                        </div>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="{{'route(logout)'}}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">Logout</a>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
                     </div>
                 </div>
             </div>
-
-            <!-- Bootstrap core JavaScript-->
-            <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
-            <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-            <!-- Core plugin JavaScript-->
-            <script src="{{asset('assets/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-            <!-- Custom scripts for all pages-->
-            <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
-
-            <!-- Page level plugins -->
-            <script src="{{asset('assets/vendor/chart.js/Chart.min.js')}}"></script>
-
-            <!-- Page level custom scripts -->
-            <script src="{{asset('assets/js/demo/chart-area-demo.js')}}"></script>
-            <script src="{{asset('assets/js/demo/chart-pie-demo.js')}}"></script>
-            @yield('script')
         </div>
     </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{asset('assets/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{asset('assets/js/sb-admin-2.min.js')}}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{asset('assets/vendor/chart.js/Chart.min.js')}}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{asset('assets/js/demo/chart-area-demo.js')}}"></script>
+    <script src="{{asset('assets/js/demo/chart-pie-demo.js')}}"></script>
+    @yield('script')
+
 </body>
 
 </html>
